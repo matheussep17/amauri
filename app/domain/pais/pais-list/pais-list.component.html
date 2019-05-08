@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <tr *ngFor= "let pais of paises">
-      <td>{{pais.nome}}</td>
+      <td> <button [routerLink]="['/pais/visualizar', pais.id]" class="btn btn-link">{{pais.nome}}</button></td>
       <td>
         <button [routerLink]="['/pais/editar', pais.id]" class="btn btn-link">Editar</button>
         <button (click)= "onDelete(pais.id)" class="btn btn-link">Deletar</button>

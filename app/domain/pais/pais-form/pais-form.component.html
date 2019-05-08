@@ -4,16 +4,19 @@
 <div class="panel panel-default">
   <div class="panel-body">    
     <div class="row">
-      <div class="col-md-12 col-lg-6">
-        <div class= "formGroup">
-          <label class="control-label">Nome</label>
-          <input type="text" class="form-control" formControlName="nome">
+      <div class="col-md-12 col-lg-4">
+          <field label = "Nome" required="true"><input type="text" 
+          class="form-control" formControlName="nome"></field>      
         </div>
       </div>
     </div>
-  </div>
+
   <div class="panel-footer">
-    <button class="btn btn-sucess" (click)="onSave(paisForm.value)">Salvar</button>
+    <button class="btn btn-primary" [routerLink]="['/pais/editar', pais.id]" *ngIf="paisForm.disabled">Editar</button>
+    
+    <button class="btn btn-success" (click)="onSave(paisForm.value)" *ngIf="!paisForm.disabled">Salvar</button>
+
+    <button class="btn btn-default ml-2" [routerLink]="['/pais']">Cancelar</button>
   </div>
 </div>
 </form>

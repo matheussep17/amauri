@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pais } from '../pais';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import Validation from '../../core/util/validation';
 
 @Component({
   selector: 'app-pais-form',
@@ -34,20 +35,35 @@ export class PaisFormComponent implements OnInit {
       id: [],
       nome: ['', Validators.required],
     },{});
-    // Busca os dados do pais caso seja editar
+    // Busca os dados do pais caso seja editar ou visualizar
     if(this.pais.id)
     {
       this.paisService.findById(this.pais.id)
       .subscribe( pais => this.paisForm.patchValue(pais))
     }
+    // Desabilitar todos os campos do formulário caso seja visualizar
+    if(this.route.snapshot.url[0].path == 'visualizar'){
+      // Desabilita o formulário
+      this.paisForm.disable();
+      // Altera o titulo da pagina
+      this.titulo= 'Visualizar';
+    }
   }
   
   onSave(pais:Pais){
-    this.paisService.save(pais)
-    .subscribe(pais => {
-      console.log("Pais salvo com sucesso!");
-      this.router.navigate(['/pais']);
-    });
+    // Verificar se o formulario esta inválido
+
+    if(this.paisForm.invalid){
+      console.log("Formulário inválido");
+      Validation.allFormFields(this.paisForm);
+
+    } else {
+      this.paisService.save(pais)
+      .subscribe(pais => {
+        console.log("Pais salvo com sucesso!");
+        this.router.navigate(['/pais']);
+      });
+    } 
   }
 }
 
