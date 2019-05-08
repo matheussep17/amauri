@@ -1,0 +1,19 @@
+<h1 class="page-title">{{ titulo }}</h1>
+
+<form [formGroup] = "paisForm">
+<div class="panel panel-default">
+  <div class="panel-body">    
+    <div class="row">
+      <div class="col-md-12 col-lg-6">
+        <div class= "formGroup">
+          <label class="control-label">Nome</label>
+          <input type="text" class="form-control" formControlName="nome">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-sucess" (click)="onSave(paisForm.value)">Salvar</button>
+  </div>
+</div>
+</form>
