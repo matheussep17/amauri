@@ -1,3 +1,27 @@
-<p>
-  mantenedora-list works!
-</p>
+<h1 class="page-title"> {{titulo}} Mantenedora</h1>
+
+<button class="btn btn-primary mb-3" [routerLink]="['/mantenedora/novo']" > Cadastrar </button>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Razão Social</th>
+      <th>CNPJ</th>
+      <th>Pais</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mantenedora of mantenedoras">
+      <td> <button class="btn btn-link" [routerLink]="['/mantenedora/visualizar', mantenedora.id]"> {{ mantenedora.nome }} </button></td>
+      <td> {{ mantenedora.razaoSocial }}</td>
+      <td> {{ mantenedora.cnpj }}</td>
+      <td> {{ mantenedora.endereco.pais.nome }}</td>
+      <td>
+          <button class="btn btn-link" [routerLink]="['/mantenedora/editar', mantenedora.id]">Editar</button>
+          <button (click)= "onDelete(mantenedora.id)" class="btn btn-link">Deletar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,3 +1,73 @@
-<p>
-  mantenedora-form works!
-</p>
+<h1 class="page-title"> {{titulo}} Mantenedora</h1>
+
+<form [formGroup]="mantenedoraForm">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <field label="Nome" required="true">
+            <input type="text" class="form-control" formControlName="nome">
+          </field>
+        </div>
+        <div class="col md-6 col-lg-4">
+          <field label="Razão Social" required="true">
+            <input type="text" class="form-control" formControlName="razaoSocial">
+          </field>
+        </div>
+        <div class="col md-6 col-lg-4">
+          <field label="CNPJ" required="true">
+            <input type="text" class="form-control" formControlName="cnpj">
+          </field>
+        </div>
+      </div>
+      <div formGroupName="endereco">
+        <div class="row">
+          <div class="col md-6 col-lg-4">
+            <field label="Logradouro" required="true">
+              <input type="text" class="form-control" formControlName="logradouro">
+            </field>
+          </div>
+          <div class="col md-6 col-lg-4">
+            <field label="Complemento" required="true">
+              <input type="text" class="form-control" formControlName="complemento">
+            </field>
+          </div>
+          <div class="col md-6 col-lg-4">
+            <field label="Bairro" required="true">
+              <input type="text" class="form-control" formControlName="bairro">
+            </field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col md-6 col-lg-4">
+            <field label="Cidade" required="true">
+              <input type="text" class="form-control" formControlName="cidade">
+            </field>
+          </div>
+          <div class="col md-6 col-lg-4">
+            <field label="Estado" required="true">
+              <input type="text" class="form-control" formControlName="estado">
+            </field>
+          </div>
+          <div class="col md-6 col-lg-4">
+              <field label="Pais" required="true">
+               <select class="form-control" formControlName="pais" [compareWith]= "compareFn">
+                 <option></option>
+                  <option *ngFor="let pais of paises" [ngValue]="pais">{{pais.nome}}</option>
+               </select>
+              </field>
+            </div>
+
+        </div>
+      </div>
+      <div class="panel-foot">
+    
+          <button class="btn btn-primary" [routerLink]="['/mantenedora/editar', mantenedora.id]" *ngIf="mantenedoraForm.disabled">Editar</button>
+    
+          <button class="btn btn-success" (click)="onSave(mantenedoraForm.value)" *ngIf="!mantenedoraForm.disabled">Salvar</button>
+      
+          <button class="btn btn-default ml-2" [routerLink]="['/mantenedora']">Cancelar</button>
+    </div>
+  </div>
+  </div>
+</form>

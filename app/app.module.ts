@@ -11,7 +11,7 @@ import { MantenedoraFormComponent } from './domain/mantenedora/mantenedora-form/
 @NgModule({
   declarations: [
     AppComponent,
-    MantenedoraFormComponent,
+
     
   ],
   imports: [
